@@ -39,14 +39,14 @@ export function AppSidebar() {
   return (
     <Sidebar>
       {/* 사이드바 헤더 (헤더 높이와 동일하게 h-16) */}
-      <SidebarHeader className="h-16 border-b px-6 flex items-center">
-        <Link href="/" className="flex items-center space-x-2">
-          <div className="flex h-8 w-8 items-center justify-center rounded-md bg-primary text-primary-foreground">
+      <SidebarHeader className="h-16 border-b px-4 flex items-center">
+        <Link href="/" className="flex items-center space-x-2 w-full">
+          <div className="flex h-8 w-8 items-center justify-center rounded-md bg-primary text-primary-foreground shrink-0">
             <span className="text-lg font-bold">K</span>
           </div>
-          <div className="flex flex-col">
-            <span className="text-sm font-semibold">Keyboard</span>
-            <span className="text-xs text-muted-foreground">v1.0.0</span>
+          <div className="flex flex-col min-w-0 flex-1">
+            <span className="text-sm font-semibold truncate">Keyboard</span>
+            <span className="text-xs text-muted-foreground truncate">v1.0.0</span>
           </div>
         </Link>
       </SidebarHeader>
@@ -60,7 +60,7 @@ export function AppSidebar() {
               <SidebarMenu>
                 {section.items.map((item) => {
                   const isActive = pathname === item.href;
-                  
+
                   return (
                     <SidebarMenuItem key={item.href}>
                       <SidebarMenuButton
