@@ -54,12 +54,12 @@ export function MainLayout({ children, showSidebar = true }: MainLayoutProps) {
   }
 
   return (
-    <div className="flex min-h-screen flex-col">
-      {/* 최상단 헤더 - 전체 너비 */}
-      <Header showSidebarToggle={true} showLogo={true} />
+    <SidebarProvider>
+      <div className="flex min-h-screen flex-col">
+        {/* 최상단 헤더 - 전체 너비 */}
+        <Header showSidebarToggle={true} showLogo={true} />
 
-      {/* 사이드바 + 메인 콘텐츠 영역 */}
-      <SidebarProvider>
+        {/* 사이드바 + 메인 콘텐츠 영역 */}
         <div className="flex flex-1 w-full">
           {/* 좌측 사이드바 */}
           <AppSidebar />
@@ -75,8 +75,8 @@ export function MainLayout({ children, showSidebar = true }: MainLayoutProps) {
             <Footer />
           </SidebarInset>
         </div>
-      </SidebarProvider>
-    </div>
+      </div>
+    </SidebarProvider>
   );
 }
 
