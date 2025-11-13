@@ -65,7 +65,7 @@ export function Header({ showSidebarToggle = false, showLogo = true }: HeaderPro
             {showSidebarToggle && (
               <SidebarTrigger className="lg:hidden" />
             )}
-            
+
             {/* 로고 (사이드바가 없을 때만 표시) */}
             {showLogo && (
               <Link href="/" className="flex items-center space-x-2">
