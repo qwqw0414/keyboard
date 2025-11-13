@@ -8,6 +8,7 @@ import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Switch } from "@/components/ui/switch";
 import { Separator } from "@/components/ui/separator";
+import { MainLayout } from "@/components/layout/main-layout";
 
 /**
  * 메인 페이지 컴포넌트
@@ -26,8 +27,8 @@ import { Separator } from "@/components/ui/separator";
  */
 export default function Home() {
   return (
-    <div className="min-h-screen bg-background">
-      <main className="container mx-auto py-10 px-4 space-y-12">
+    <MainLayout>
+      <div className="container mx-auto py-10 px-4 space-y-12">
         {/* 헤더 섹션 */}
         <section className="text-center space-y-4">
           <h1 className="text-4xl font-bold tracking-tight">
@@ -302,23 +303,7 @@ export default function Home() {
             </CardContent>
           </Card>
         </section>
-
-        {/* Footer */}
-        <section className="pt-8 pb-4 text-center text-sm text-muted-foreground">
-          <p>
-            Built with{" "}
-            <a 
-              href="https://ui.shadcn.com" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="font-medium underline underline-offset-4"
-            >
-              shadcn/ui
-            </a>
-            {" "}and Next.js
-          </p>
-        </section>
-      </main>
-    </div>
+      </div>
+    </MainLayout>
   );
 }
