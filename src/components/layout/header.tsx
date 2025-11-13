@@ -101,7 +101,7 @@ export function Header({ showSidebarToggle = false, showLogo = true }: HeaderPro
           <div className="flex items-center gap-2">
             {/* 테마 전환 버튼 */}
             <ModeToggle />
-            
+
             <Button variant="ghost" size="sm" className="hidden md:flex">
               로그인
             </Button>

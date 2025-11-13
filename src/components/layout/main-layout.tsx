@@ -12,12 +12,21 @@ import { Footer } from "./footer";
  * 애플리케이션의 전체 레이아웃 구조를 정의합니다.
  * 
  * 구조:
+ * - Header: 최상단 전체 너비 헤더
  * - SidebarProvider: 사이드바 상태 관리
- * - AppSidebar: 좌측 네비게이션 (데스크톱)
- * - SidebarInset: 메인 콘텐츠 영역
- *   - Header: 상단 헤더
- *   - Main: 페이지 콘텐츠
- *   - Footer: 하단 푸터
+ *   - AppSidebar: 좌측 네비게이션 (데스크톱)
+ *   - SidebarInset: 메인 콘텐츠 영역
+ *     - Main: 페이지 콘텐츠
+ *     - Footer: 하단 푸터
+ * 
+ * 레이아웃 구조:
+ * ┌──────────────────┐
+ * │      헤더        │ <- 전체 너비
+ * ├────────┬─────────┤
+ * │사이드바 │  메인    │
+ * │        │         │
+ * │        │  푸터   │
+ * └────────┴─────────┘
  * 
  * 반응형 동작:
  * - 데스크톱 (≥1024px): 사이드바 항상 표시
@@ -45,26 +54,29 @@ export function MainLayout({ children, showSidebar = true }: MainLayoutProps) {
   }
 
   return (
-    <SidebarProvider>
-      <div className="flex min-h-screen w-full">
-        {/* 좌측 사이드바 */}
-        <AppSidebar />
+    <div className="flex min-h-screen flex-col">
+      {/* 최상단 헤더 - 전체 너비 */}
+      <Header showSidebarToggle={true} showLogo={true} />
 
-        {/* 메인 콘텐츠 영역 */}
-        <SidebarInset className="flex min-h-screen w-full flex-1 flex-col">
-          {/* 헤더 (사이드바 토글 버튼 포함, 로고 숨김) */}
-          <Header showSidebarToggle={true} showLogo={false} />
+      {/* 사이드바 + 메인 콘텐츠 영역 */}
+      <SidebarProvider>
+        <div className="flex flex-1 w-full">
+          {/* 좌측 사이드바 */}
+          <AppSidebar />
 
-          {/* 메인 콘텐츠 */}
-          <main className="flex-1 w-full">
-            {children}
-          </main>
+          {/* 메인 콘텐츠 영역 */}
+          <SidebarInset className="flex flex-1 flex-col w-full">
+            {/* 메인 콘텐츠 */}
+            <main className="flex-1 w-full">
+              {children}
+            </main>
 
-          {/* 푸터 */}
-          <Footer />
-        </SidebarInset>
-      </div>
-    </SidebarProvider>
+            {/* 푸터 */}
+            <Footer />
+          </SidebarInset>
+        </div>
+      </SidebarProvider>
+    </div>
   );
 }
 

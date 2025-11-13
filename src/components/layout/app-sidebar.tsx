@@ -11,7 +11,6 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-  SidebarHeader,
   SidebarFooter,
 } from "@/components/ui/sidebar";
 import { sidebarMenuSections } from "@/config/menu";
@@ -29,30 +28,19 @@ import { Separator } from "@/components/ui/separator";
  * - 반응형 지원 (데스크톱 전용)
  * 
  * 구조:
- * - Header: 로고 및 타이틀
  * - Content: 메뉴 섹션들
  * - Footer: 추가 정보 또는 액션
+ * 
+ * 레이아웃:
+ * 헤더가 상단에 별도로 있으므로 사이드바는 메뉴만 표시합니다.
  */
 export function AppSidebar() {
   const pathname = usePathname();
 
   return (
     <Sidebar>
-      {/* 사이드바 헤더 (헤더 높이와 패딩 동일) */}
-      <SidebarHeader className="h-16 border-b px-4 md:px-6 flex items-center">
-        <Link href="/" className="flex items-center space-x-2 w-full">
-          <div className="flex h-8 w-8 items-center justify-center rounded-md bg-primary text-primary-foreground shrink-0">
-            <span className="text-lg font-bold">K</span>
-          </div>
-          <div className="flex flex-col min-w-0 flex-1">
-            <span className="text-sm font-semibold truncate">Keyboard</span>
-            <span className="text-xs text-muted-foreground truncate">v1.0.0</span>
-          </div>
-        </Link>
-      </SidebarHeader>
-
       {/* 사이드바 콘텐츠 */}
-      <SidebarContent>
+      <SidebarContent className="pt-6">
         {sidebarMenuSections.map((section, sectionIndex) => (
           <SidebarGroup key={section.title}>
             <SidebarGroupLabel>{section.title}</SidebarGroupLabel>
