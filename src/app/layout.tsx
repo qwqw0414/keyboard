@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Noto_Sans_KR } from "next/font/google";
 import "@/styles/globals.css";
+import { ThemeProvider } from "@/components/theme-provider";
 
 /**
  * 영문 산세리프 폰트 (Geist)
@@ -45,10 +46,11 @@ export const metadata: Metadata = {
 /**
  * 루트 레이아웃 컴포넌트
  * 
- * 전역 폰트 설정을 관리합니다.
+ * 전역 폰트 및 테마 설정을 관리합니다.
  * - 한글: Noto Sans Korean (우선 순위)
  * - 영문: Geist Sans (폴백)
  * - 코드: Geist Mono
+ * - 테마: 라이트/다크/시스템 모드 지원
  * 
  * CSS 변수로 정의되어 전역에서 사용 가능합니다.
  */
@@ -58,11 +60,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ko">
+    <html lang="ko" suppressHydrationWarning>
       <body
         className={`${notoSansKR.variable} ${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );
