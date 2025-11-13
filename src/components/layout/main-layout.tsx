@@ -37,7 +37,7 @@ export function MainLayout({ children, showSidebar = true }: MainLayoutProps) {
     // 사이드바 없는 레이아웃 (예: 랜딩 페이지, 로그인 페이지)
     return (
       <div className="flex min-h-screen flex-col">
-        <Header />
+        <Header showLogo={true} />
         <main className="flex-1">{children}</main>
         <Footer />
       </div>
@@ -52,8 +52,8 @@ export function MainLayout({ children, showSidebar = true }: MainLayoutProps) {
 
         {/* 메인 콘텐츠 영역 */}
         <SidebarInset className="flex min-h-screen w-full flex-1 flex-col">
-          {/* 헤더 (사이드바 토글 버튼 포함) */}
-          <Header showSidebarToggle={true} />
+          {/* 헤더 (사이드바 토글 버튼 포함, 로고 숨김) */}
+          <Header showSidebarToggle={true} showLogo={false} />
 
           {/* 메인 콘텐츠 */}
           <main className="flex-1 w-full">

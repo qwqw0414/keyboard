@@ -22,7 +22,7 @@ import { Separator } from "@/components/ui/separator";
  * 
  * 기능:
  * - 사이드바 토글 버튼 (데스크톱에서 사이드바가 있을 때)
- * - 로고 및 브랜드명 표시
+ * - 로고 및 브랜드명 표시 (사이드바가 없을 때만)
  * - 데스크톱: 수평 네비게이션 메뉴
  * - 모바일: 햄버거 메뉴 (헤더 하단 확장 방식)
  * - 반응형 디자인 (md 브레이크포인트 기준)
@@ -33,12 +33,14 @@ import { Separator } from "@/components/ui/separator";
  * 
  * Props:
  * - showSidebarToggle: 사이드바 토글 버튼 표시 여부 (기본값: false)
+ * - showLogo: 로고 표시 여부 (기본값: true, 사이드바가 있으면 false 권장)
  */
 interface HeaderProps {
   showSidebarToggle?: boolean;
+  showLogo?: boolean;
 }
 
-export function Header({ showSidebarToggle = false }: HeaderProps) {
+export function Header({ showSidebarToggle = false, showLogo = true }: HeaderProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   // 메뉴가 열렸을 때 스크롤 방지
@@ -57,21 +59,24 @@ export function Header({ showSidebarToggle = false }: HeaderProps) {
     <>
       <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
         <div className="flex h-16 items-center justify-between px-4 md:px-6">
-          {/* 좌측: 사이드바 토글 + 로고 */}
+          {/* 좌측: 사이드바 토글 + 로고 (선택적) */}
           <div className="flex items-center gap-2">
             {/* 사이드바 토글 버튼 (사이드바가 있을 때만) */}
             {showSidebarToggle && (
               <SidebarTrigger className="lg:hidden" />
             )}
             
-            <Link href="/" className="flex items-center space-x-2">
-              <div className="flex h-8 w-8 items-center justify-center rounded-md bg-primary text-primary-foreground">
-                <span className="text-lg font-bold">K</span>
-              </div>
-              <span className="hidden font-bold sm:inline-block">
-                Keyboard
-              </span>
-            </Link>
+            {/* 로고 (사이드바가 없을 때만 표시) */}
+            {showLogo && (
+              <Link href="/" className="flex items-center space-x-2">
+                <div className="flex h-8 w-8 items-center justify-center rounded-md bg-primary text-primary-foreground">
+                  <span className="text-lg font-bold">K</span>
+                </div>
+                <span className="hidden font-bold sm:inline-block">
+                  Keyboard
+                </span>
+              </Link>
+            )}
           </div>
 
           {/* 데스크톱 네비게이션 */}
@@ -137,9 +142,9 @@ export function Header({ showSidebarToggle = false }: HeaderProps) {
                   )}
                 </Link>
               ))}
-              
+
               <Separator className="my-2" />
-              
+
               <div className="space-y-2 pt-2">
                 <Button
                   variant="outline"
