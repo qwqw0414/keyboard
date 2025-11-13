@@ -22,8 +22,8 @@ export function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="border-t bg-background">
-      <div className="container py-12 md:py-16">
+    <footer className="w-full border-t bg-background mt-auto">
+      <div className="w-full max-w-7xl mx-auto px-4 md:px-6 py-12 md:py-16">
         {/* 메뉴 섹션 그리드 */}
         <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-4">
           {footerMenuSections.map((section) => (

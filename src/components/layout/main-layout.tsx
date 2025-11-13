@@ -51,12 +51,12 @@ export function MainLayout({ children, showSidebar = true }: MainLayoutProps) {
         <AppSidebar />
 
         {/* 메인 콘텐츠 영역 */}
-        <SidebarInset className="flex flex-1 flex-col">
+        <SidebarInset className="flex min-h-screen w-full flex-1 flex-col">
           {/* 헤더 (사이드바 토글 버튼 포함) */}
           <Header showSidebarToggle={true} />
 
           {/* 메인 콘텐츠 */}
-          <main className="flex-1">
+          <main className="flex-1 w-full">
             {children}
           </main>
 
