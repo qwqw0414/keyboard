@@ -1,11 +1,10 @@
 "use client";
 
 import { ReactNode } from "react";
-import { SidebarProvider, SidebarInset, SidebarTrigger } from "@/components/ui/sidebar";
+import { SidebarProvider, SidebarInset } from "@/components/ui/sidebar";
 import { AppSidebar } from "./app-sidebar";
 import { Header } from "./header";
 import { Footer } from "./footer";
-import { Separator } from "@/components/ui/separator";
 
 /**
  * 메인 레이아웃 컴포넌트
@@ -53,15 +52,8 @@ export function MainLayout({ children, showSidebar = true }: MainLayoutProps) {
 
         {/* 메인 콘텐츠 영역 */}
         <SidebarInset className="flex flex-1 flex-col">
-          {/* 헤더 */}
-          <Header />
-
-          {/* 사이드바 토글 버튼 (모바일/태블릿) */}
-          <div className="flex items-center gap-2 border-b px-4 py-2 lg:hidden">
-            <SidebarTrigger />
-            <Separator orientation="vertical" className="h-4" />
-            <span className="text-sm font-medium">메뉴</span>
-          </div>
+          {/* 헤더 (사이드바 토글 버튼 포함) */}
+          <Header showSidebarToggle={true} />
 
           {/* 메인 콘텐츠 */}
           <main className="flex-1">

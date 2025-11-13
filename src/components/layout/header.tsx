@@ -18,6 +18,7 @@ import {
   NavigationMenuList,
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
+import { SidebarTrigger } from "@/components/ui/sidebar";
 import { mainMenuItems } from "@/config/menu";
 import { useState } from "react";
 
@@ -27,6 +28,7 @@ import { useState } from "react";
  * 전역 네비게이션을 제공합니다.
  * 
  * 기능:
+ * - 사이드바 토글 버튼 (데스크톱에서 사이드바가 있을 때)
  * - 로고 및 브랜드명 표시
  * - 데스크톱: 수평 네비게이션 메뉴
  * - 모바일: 햄버거 메뉴 (Sheet 컴포넌트 활용)
@@ -35,15 +37,27 @@ import { useState } from "react";
  * 반응형 전략:
  * - 768px 이상: 전체 네비게이션 메뉴 표시
  * - 768px 미만: 햄버거 메뉴 버튼만 표시
+ * 
+ * Props:
+ * - showSidebarToggle: 사이드바 토글 버튼 표시 여부 (기본값: false)
  */
-export function Header() {
+interface HeaderProps {
+  showSidebarToggle?: boolean;
+}
+
+export function Header({ showSidebarToggle = false }: HeaderProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container flex h-16 items-center justify-between">
-        {/* 로고 영역 */}
+      <div className="flex h-16 items-center justify-between px-4 md:px-6">
+        {/* 좌측: 사이드바 토글 + 로고 */}
         <div className="flex items-center gap-2">
+          {/* 사이드바 토글 버튼 (사이드바가 있을 때만) */}
+          {showSidebarToggle && (
+            <SidebarTrigger className="lg:hidden" />
+          )}
+          
           <Link href="/" className="flex items-center space-x-2">
             <div className="flex h-8 w-8 items-center justify-center rounded-md bg-primary text-primary-foreground">
               <span className="text-lg font-bold">K</span>
